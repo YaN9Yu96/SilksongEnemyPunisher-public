@@ -12,9 +12,9 @@ namespace SilksongEnemyPunisher
         public static float VelocityPunishWindow => Main.VelocityPunishWindow.Value;
         public static float VelocityMaxPenalty => Main.VelocityMaxPenalty.Value;
         public static float VelocityPerHitPenalty => Main.VelocityPerHitPenalty.Value;
+        public static bool VelocityPunishAffectsBoss => Main.VelocityPunishAffectsBoss.Value;
 
         private static Dictionary<GameObject, List<float>> _hitTimes = new Dictionary<GameObject, List<float>>();
-
 
         public static void UpdatePenalty(GameObject go)
         {
@@ -60,6 +60,8 @@ namespace SilksongEnemyPunisher
             GameObject go = __instance.Fsm.GetOwnerDefaultTarget(__instance.gameObject);
             if (go == null || !go.IsEnemy())
                 return;
+            if (!VelocityPunishAffectsBoss && go.IsBoss())
+                return;
 
             var vel = __instance.GetVelocity();
             if (vel.magnitude >= VelocityPunishThreshold)
@@ -76,8 +78,10 @@ namespace SilksongEnemyPunisher
             GameObject go = __instance.Fsm.GetOwnerDefaultTarget(__instance.gameObject);
             if (go == null || !go.IsEnemy())
                 return;
+            if (!VelocityPunishAffectsBoss && go.IsBoss())
+                return;
 
-            var rb = go.GetComponent<Rigidbody2D>();
+            var rb = go.GetRigidbody2D();
             if (rb == null) return;
 
             var penalty = GetPenalty(go);
@@ -103,6 +107,8 @@ namespace SilksongEnemyPunisher
             GameObject go = __instance.Fsm.GetOwnerDefaultTarget(__instance.gameObject);
             if (go == null || !go.IsEnemy())
                 return;
+            if (!VelocityPunishAffectsBoss && go.IsBoss())
+                return;
 
             var vel = __instance.GetVelocity();
             if (vel.magnitude >= VelocityPunishThreshold)
@@ -119,8 +125,10 @@ namespace SilksongEnemyPunisher
             GameObject go = __instance.Fsm.GetOwnerDefaultTarget(__instance.gameObject);
             if (go == null || !go.IsEnemy())
                 return;
+            if (!VelocityPunishAffectsBoss && go.IsBoss())
+                return;
 
-            var rb = go.GetComponent<Rigidbody2D>();
+            var rb = go.GetRigidbody2D();
             if (rb == null) return;
 
             var penalty = GetPenalty(go);

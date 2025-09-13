@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
       <HintPath>libs\UnityEngine.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
 

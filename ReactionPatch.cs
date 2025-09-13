@@ -9,6 +9,7 @@ namespace SilksongEnemyPunisher
     {
         public static float ReactionSpeed => Main.ReactionSpeed.Value;
         public static float ReactionMinTime => Main.ReactionMinTime.Value;
+        public static bool AffectsBoss => Main.ReactionAffectsBoss.Value;
 
         [HarmonyPrefix]
         [HarmonyPatch(
@@ -23,7 +24,10 @@ namespace SilksongEnemyPunisher
         {
             if (clip == null) 
                 return;
-            if (!__instance.gameObject.IsEnemy())
+            var go = __instance.gameObject;
+            if (go == null || !go.IsEnemy())
+                return;
+            if (!AffectsBoss && go.IsBoss())
                 return;
 
             string clipName = clip.name.ToLower();

@@ -9,11 +9,13 @@ namespace SilksongEnemyPunisher
     {
         public static ConfigEntry<float> ReactionSpeed;
         public static ConfigEntry<float> ReactionMinTime;
+        public static ConfigEntry<bool> ReactionAffectsBoss;
 
         public static ConfigEntry<float> VelocityPunishThreshold;
         public static ConfigEntry<float> VelocityPunishWindow;
         public static ConfigEntry<float> VelocityMaxPenalty;
         public static ConfigEntry<float> VelocityPerHitPenalty;
+        public static ConfigEntry<bool> VelocityPunishAffectsBoss;
 
         public static Main Instance { get; private set; }
         public static BepInEx.Logging.ManualLogSource Log => Instance.Logger;
@@ -48,6 +50,13 @@ namespace SilksongEnemyPunisher
                 "敌人准备动画最小时间（秒）\nMinimum time for enemy prepare animation (seconds)"
             );
 
+            ReactionAffectsBoss = Config.Bind(
+                "Reaction",
+                "ReactionAffectsBoss",
+                true,
+                "对boss生效\nApplies to bosses"
+            );
+
             VelocityPunishThreshold = Config.Bind(
                 "Velocity",
                 "VelocityPunishThreshold",
@@ -74,6 +83,12 @@ namespace SilksongEnemyPunisher
                 "VelocityPerHitPenalty",
                 0.2f,
                 "每次惩罚扣除速度比例\nSpeed reduction per hit"
+            );
+            VelocityPunishAffectsBoss = Config.Bind(
+                "Velocity",
+                "VelocityPunishAffectsBoss",
+                false,
+                "对boss生效\nApplies to bosses"
             );
         }
     }
